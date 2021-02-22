@@ -1,3 +1,4 @@
+import axios from "axios"
 const Tabs = (topics) => {
   // TASK 3
   // ---------------------
@@ -13,9 +14,27 @@ const Tabs = (topics) => {
   //   <div class="tab">technology</div>
   // </div>
   //
+  //let's instantiate and get the heirarchy
+  const topic = document.createElement('div')
+const tab1 = document.createElement('div')
+const tab2 = document.createElement('div')
+const tab3 = document.createElement('div')
+topic.appendChild(tab1)
+topic.appendChild(tab2)
+topic.appendChild(tab3)
+//get some classes and txts
+tab1.textContent = "javascript";
+tab2.textContent = "bootstrap";
+tab3.textContent = "technology";
+topic.classList.add('topics');
+tab1.classList.add('tab');
+tab2.classList.add('tab');
+tab3.classList.add('tab')
+//return
+return topic
 }
 
-const tabsAppender = (selector) => {
+const tabsAppender = (tabs-container) => {
   // TASK 4
   // ---------------------
   // Implement this function which takes a css selector as its only argument.
@@ -23,6 +42,33 @@ const tabsAppender = (selector) => {
   // Find the array of topics inside the response, and create the tabs using the Tabs component.
   // Append the tabs to the element in the DOM that matches the selector passed to the function.
   //
+
+ axios.get('https://lambda-times-api.herokuapp.com/topics') 
+.then(res => {
+  // console.log('success');
+  Tabs(res);
+})
+.catch(console.log('error something went wrong'));
+document.querySelector('.tabs-container').appendChild(topic);
 }
 
 export { Tabs, tabsAppender }
+
+/*
+const otherAccts = followersArray.forEach(el => {
+  axios.get('https://api.github.com/users/' + el)
+       .then(res => {
+  // console.log('success');
+  gitActMaker(res);
+})
+.catch(console.log('error something went wrong'));
+});
+console.log(otherAccts)*/
+/*
+let getAccount = axios.get('https://api.github.com/users/Yonathan-Admasu728') 
+.then(res => {
+  // console.log('success');
+  gitActMaker(res);
+})
+.catch(console.log('error something went wrong'));
+console.log(getAccount);*/
