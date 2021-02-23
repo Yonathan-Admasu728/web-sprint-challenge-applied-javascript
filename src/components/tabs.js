@@ -14,27 +14,32 @@ const Tabs = (topics) => {
   //   <div class="tab">technology</div>
   // </div>
   //
+  
   //let's instantiate and get the heirarchy
   const topic = document.createElement('div')
-const tab1 = document.createElement('div')
-const tab2 = document.createElement('div')
-const tab3 = document.createElement('div')
-topic.appendChild(tab1)
-topic.appendChild(tab2)
-topic.appendChild(tab3)
-//get some classes and txts
-tab1.textContent = "javascript";
-tab2.textContent = "bootstrap";
-tab3.textContent = "technology";
-topic.classList.add('topics');
-tab1.classList.add('tab');
-tab2.classList.add('tab');
-tab3.classList.add('tab')
+  const tabJ = document.createElement('div')
+  const tabB = document.createElement('div')
+  const tabT = document.createElement('div')
+//let's append
+topic.appendChild(tabJ)
+topic.appendChild(tabB)
+topic.appendChild(tabT)
+
+
+  //get some classes and txts
+topic.classList.add('topic');
+tabJ.classList.add('tabJ')
+tabB.classList.add('tabB')
+tabT.classList.add('tabT')
+topic.textContent = topics
+//tabJ.textContent = "jvaScript";
+//tabB.textContent = "bootStrap";
+//tabT.textContent = "technology"
 //return
 return topic
 }
 
-const tabsAppender = (tabs-container) => {
+const tabsAppender = (selector) => {
   // TASK 4
   // ---------------------
   // Implement this function which takes a css selector as its only argument.
@@ -42,33 +47,19 @@ const tabsAppender = (tabs-container) => {
   // Find the array of topics inside the response, and create the tabs using the Tabs component.
   // Append the tabs to the element in the DOM that matches the selector passed to the function.
   //
-
+const outpoint = document.querySelector(selector)
  axios.get('https://lambda-times-api.herokuapp.com/topics') 
 .then(res => {
-  // console.log('success');
-  Tabs(res);
+   console.log('success');
+  const myData = res.data.topics
+  myData.forEach(el =>{
+    const newVar = Tabs(el)
+    outpoint.appendChild(newVar);
+  })
 })
 .catch(console.log('error something went wrong'));
-document.querySelector('.tabs-container').appendChild(topic);
+
 }
 
 export { Tabs, tabsAppender }
 
-/*
-const otherAccts = followersArray.forEach(el => {
-  axios.get('https://api.github.com/users/' + el)
-       .then(res => {
-  // console.log('success');
-  gitActMaker(res);
-})
-.catch(console.log('error something went wrong'));
-});
-console.log(otherAccts)*/
-/*
-let getAccount = axios.get('https://api.github.com/users/Yonathan-Admasu728') 
-.then(res => {
-  // console.log('success');
-  gitActMaker(res);
-})
-.catch(console.log('error something went wrong'));
-console.log(getAccount);*/
